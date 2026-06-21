@@ -7,8 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:#0a0a0a}
 :root{
   --pink:#f472b6;--pink2:#ec4899;--pink3:#db2777;
   --pinkl:#fdf2f8;--pinkll:#fce7f3;
@@ -18,8 +21,8 @@
   --sh:0 2px 20px rgba(0,0,0,0.08);
   --sh-lg:0 16px 48px rgba(0,0,0,0.16);
 }
-html{-webkit-tap-highlight-color:transparent;background:var(--chalk)}
-body{font-family:'DM Sans',sans-serif;color:var(--void);-webkit-font-smoothing:antialiased;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;background:var(--chalk)}
+html{-webkit-tap-highlight-color:transparent;background:#0a0a0a}
+body{font-family:'DM Sans',sans-serif;color:var(--void);-webkit-font-smoothing:antialiased;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;background:#0a0a0a}
 button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .screen{display:none}.screen.on{display:block}
 
@@ -32,7 +35,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .w-c3{width:150px;height:150px;background:var(--pink2);bottom:200px;right:20px}
 .w-content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;padding:max(60px,env(safe-area-inset-top)) 28px 48px}
 .w-logo{margin-bottom:auto}
-.pila-logo{font-family:'Pacifico',cursive;font-size:52px;background:linear-gradient(135deg,#f9a8d4,#f472b6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;letter-spacing:-1px}
+.pila-logo{font-family:'Pacifico',cursive;font-size:52px;background:linear-gradient(135deg,#f9a8d4,#f472b6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;letter-spacing:0px;padding-left:4px}
 .pila-tagline{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:6px;font-weight:500}
 .w-hero{margin:auto 0 48px}
 .w-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(244,114,182,0.15);border:0.5px solid rgba(244,114,182,0.3);border-radius:100px;padding:6px 14px;margin-bottom:20px}
@@ -47,13 +50,13 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .w-foot{text-align:center;margin-top:14px;font-size:12px;color:rgba(255,255,255,0.2)}
 
 /* ── STUDIO SELECT ── */
-.studio-screen{min-height:100vh;background:var(--chalk);display:flex;flex-direction:column}
+.studio-screen{min-height:100vh;background:var(--chalk);display:flex;flex-direction:column;background:#0a0a0a}
 .ss-hdr{background:var(--void);padding:max(56px,env(safe-area-inset-top)) 24px 24px;position:relative;overflow:hidden}
 .ss-hdr-glow{position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(244,114,182,0.2) 0%,transparent 70%);pointer-events:none}
-.ss-logo{font-family:'Pacifico',cursive;font-size:28px;background:linear-gradient(135deg,#f9a8d4,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ss-logo{font-family:'Pacifico',cursive;font-size:28px;background:linear-gradient(135deg,#f9a8d4,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;padding-left:3px;line-height:1.3}
 .ss-ti{font-size:26px;font-weight:700;color:#fff;margin-bottom:4px;letter-spacing:-0.5px}
 .ss-sub{font-size:14px;color:rgba(255,255,255,0.4);font-weight:300}
-.ss-body{flex:1;padding:20px}
+.ss-body{flex:1;padding:20px;background:var(--chalk);border-radius:24px 24px 0 0;margin-top:-1px}
 .ss-search{display:flex;align-items:center;gap:10px;background:#fff;border:.5px solid rgba(0,0,0,0.08);border-radius:14px;padding:14px 16px;margin-bottom:20px;box-shadow:var(--sh)}
 .ss-search-ic{font-size:16px;color:var(--dust)}
 .ss-search input{flex:1;border:none;outline:none;font-size:15px;color:var(--void);font-family:'DM Sans',sans-serif;background:transparent}
@@ -75,7 +78,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .studio-arrow{font-size:16px;color:var(--dust)}
 
 /* CLASS SELECT */
-.class-screen{min-height:100vh;background:var(--chalk)}
+.class-screen{min-height:100vh;background:#0a0a0a}
 .cs-hdr{background:var(--void);padding:max(56px,env(safe-area-inset-top)) 24px 24px}
 .back-btn{background:rgba(255,255,255,0.1);color:#fff;border-radius:100px;padding:8px 16px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:6px;margin-bottom:16px;transition:background .2s}
 .back-btn:active{background:rgba(255,255,255,0.15)}
@@ -83,7 +86,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .cs-studio-dot{width:8px;height:8px;border-radius:50%;background:var(--pink);flex-shrink:0}
 .cs-studio-name{font-size:13px;color:rgba(255,255,255,0.5);font-weight:500}
 .cs-ti{font-size:26px;font-weight:700;color:#fff;letter-spacing:-0.5px}
-.cs-body{padding:20px}
+.cs-body{padding:20px;background:var(--chalk);border-radius:24px 24px 0 0;margin-top:-1px}
 .class-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
 .class-opt{background:#fff;border-radius:14px;padding:16px 14px;text-align:center;box-shadow:var(--sh);border:2px solid transparent;cursor:pointer;transition:all .2s}
 .class-opt:active{transform:scale(0.96)}
@@ -105,7 +108,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .cam-screen{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column}
 .cam-screen.on{display:flex}
 .cam-hdr{padding:max(54px,env(safe-area-inset-top)) 20px 14px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(0,0,0,0.8),transparent);position:absolute;top:0;left:0;right:0;z-index:10}
-.cam-logo{font-family:'Pacifico',cursive;font-size:22px;background:linear-gradient(135deg,#f9a8d4,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cam-logo{font-family:'Pacifico',cursive;font-size:22px;background:linear-gradient(135deg,#f9a8d4,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:2px;line-height:1.3}
 .cam-step-pill{background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border-radius:100px;padding:6px 14px;font-size:12px;color:#fff;font-weight:600;letter-spacing:0.05em}
 .cam-close{background:rgba(255,255,255,0.12);color:#fff;border-radius:50%;width:36px;height:36px;font-size:14px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
 .cam-main{flex:1;position:relative;overflow:hidden}
@@ -128,7 +131,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .result-screen{position:fixed;inset:0;background:#000;z-index:200;display:none;flex-direction:column}
 .result-screen.on{display:flex}
 .res-hdr{padding:max(54px,env(safe-area-inset-top)) 20px 14px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px)}
-.res-logo{font-family:'Pacifico',cursive;font-size:22px;background:linear-gradient(135deg,#f9a8d4,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.res-logo{font-family:'Pacifico',cursive;font-size:22px;background:linear-gradient(135deg,#f9a8d4,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:2px;line-height:1.3}
 .retake-btn{background:rgba(255,255,255,0.1);color:#fff;border-radius:100px;padding:8px 16px;font-size:13px;font-weight:600;border:.5px solid rgba(255,255,255,0.2);letter-spacing:0.02em}
 .retake-btn:active{transform:scale(0.96);transition:transform .15s}
 .res-canvas-wrap{flex:1;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden;padding:8px}
