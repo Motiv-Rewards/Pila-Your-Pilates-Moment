@@ -71,6 +71,8 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .studio-av-sage{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
 .studio-av-sky{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
 .studio-av-lilac{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
+.studio-av-coral{background:linear-gradient(135deg,#ffe4e6,#fecdd3)}
+.studio-av-sand{background:linear-gradient(135deg,#fef3c7,#fde68a)}
 .studio-info{flex:1}
 .studio-name{font-size:15px;font-weight:600;margin-bottom:2px}
 .studio-addr{font-size:12px;color:var(--dust);margin-bottom:4px}
@@ -282,9 +284,30 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 // ── DATA ──
 const STUDIOS = [
   { id:'motiv', name:'MOTIV Pilates', addr:'842 Danforth Ave', neighborhood:'Danforth', em:'🌿', color:'studio-av-sage', ig:'@motivpilates', instructors:['Lisa W.','Hayley C.','Chloe W.','Simona E.'] },
-  { id:'studio2', name:'Reform House', addr:'1240 Bay St', neighborhood:'Yorkville', em:'🏙️', color:'studio-av-sky', ig:'@reformhouse.to', instructors:['Mia K.','Jordan L.','Avery S.'] },
-  { id:'studio3', name:'The Reformery', addr:'556 Queen St W', neighborhood:'Queen West', em:'🌸', color:'studio-av-pink', ig:'@thereformery', instructors:['Zara M.','Blake R.','Sage T.'] },
-  { id:'studio4', name:'Core & Co.', addr:'2901 Bayview Ave', neighborhood:'Leaside', em:'💜', color:'studio-av-lilac', ig:'@coreandco.to', instructors:['Ella V.','Nora H.','Isla P.'] },
+  { id:'muse', name:'Muse Movement', addr:'890 Dundas St W', neighborhood:'Trinity Bellwoods', em:'🌸', color:'studio-av-pink', ig:'@musemovement.ca', instructors:['Instructor'] },
+  { id:'assembly', name:'Assembly Movement', addr:'954 College St', neighborhood:'Little Italy', em:'💪', color:'studio-av-lilac', ig:'@assemblymovement', instructors:['Instructor'] },
+  { id:'jaybird', name:'Jaybird Pilates', addr:'751 Queen St W', neighborhood:'Queen West', em:'🐦', color:'studio-av-sky', ig:'@jaybird.pilates', instructors:['Instructor'] },
+  { id:'niceday', name:'Nice Day Pilates', addr:'343 King St E', neighborhood:'Corktown', em:'☀️', color:'studio-av-sand', ig:'@nicedaypilates', instructors:['Instructor'] },
+  { id:'sliving', name:'Sliving Studios', addr:'150 Eglinton Ave E', neighborhood:'Midtown', em:'✨', color:'studio-av-pink', ig:'@slivingstudios', instructors:['Instructor'] },
+  { id:'fortides', name:'Fortides Pilates', addr:'1 Eglinton Ave E', neighborhood:'Davisville', em:'🧘', color:'studio-av-sage', ig:'@fortidespilates', instructors:['Instructor'] },
+  { id:'solis', name:'Solis Movement', addr:'1350 Danforth Ave', neighborhood:'East Toronto', em:'🔥', color:'studio-av-coral', ig:'@solismovement.ca', instructors:['Instructor'] },
+  { id:'bode', name:'Bode Movement', addr:'368 Dufferin St', neighborhood:'Dufferin', em:'💙', color:'studio-av-sky', ig:'@bodemovement', instructors:['Instructor'] },
+  { id:'strongpilates', name:'Strong Pilates', addr:'580 College St', neighborhood:'Little Italy', em:'⚡', color:'studio-av-lilac', ig:'@strongpilates.ca', instructors:['Instructor'] },
+  { id:'clubpilatesjunction', name:'Club Pilates Junction', addr:'2720 Dundas St W', neighborhood:'The Junction', em:'🏠', color:'studio-av-sage', ig:'@clubpilates', instructors:['Instructor'] },
+  { id:'clubpilatescollege', name:'Club Pilates College Park', addr:'777 Bay St', neighborhood:'College Park', em:'🏙️', color:'studio-av-sky', ig:'@clubpilates', instructors:['Instructor'] },
+  { id:'clubpilatesleslieville', name:'Club Pilates Leslieville', addr:'1000 Queen St E', neighborhood:'Leslieville', em:'🌺', color:'studio-av-pink', ig:'@clubpilates', instructors:['Instructor'] },
+  { id:'coco', name:'Coco Reformer Pilates', addr:'Toronto', neighborhood:'Downtown', em:'🥥', color:'studio-av-sand', ig:'@coco.reformer.pilates', instructors:['Instructor'] },
+  { id:'sheboss', name:'SheBoss Studio', addr:'Toronto', neighborhood:'Downtown', em:'👑', color:'studio-av-lilac', ig:'@shebossstudio', instructors:['Instructor'] },
+  { id:'culture', name:'Culture Studios', addr:'Toronto', neighborhood:'Downtown', em:'🎨', color:'studio-av-sky', ig:'@culturestudios.ca', instructors:['Instructor'] },
+  { id:'elemon', name:'Elemon Pilates', addr:'Toronto', neighborhood:'Midtown', em:'🍋', color:'studio-av-sand', ig:'@elemonpilates', instructors:['Instructor'] },
+  { id:'bluecanoe', name:'Blue Canoe Zen Gym', addr:'Toronto', neighborhood:'East End', em:'🛶', color:'studio-av-sky', ig:'@bluecanoe.zen', instructors:['Instructor'] },
+  { id:'iamyoga', name:'IAM Yoga Pilates', addr:'2323 Yonge St', neighborhood:'Yonge & Eglinton', em:'🧘', color:'studio-av-sage', ig:'@iamyogapilates', instructors:['Instructor'] },
+  { id:'galeria', name:'Galeria Pilates', addr:'Toronto', neighborhood:'Midtown', em:'🖼️', color:'studio-av-pink', ig:'@galeriapilates', instructors:['Instructor'] },
+  { id:'bodyharmonics', name:'Body Harmonics', addr:'70 The Esplanade', neighborhood:'St Lawrence', em:'🎵', color:'studio-av-lilac', ig:'@bodyharmonics', instructors:['Instructor'] },
+  { id:'wickedbarre', name:'Wicked Barre', addr:'Thornhill', neighborhood:'Thornhill', em:'🩰', color:'studio-av-pink', ig:'@wickedbarre', instructors:['Instructor'] },
+  { id:'sukha', name:'Sukha Yoga & Pilates', addr:'Toronto', neighborhood:'East End', em:'🌀', color:'studio-av-sage', ig:'@sukhayoga.to', instructors:['Instructor'] },
+  { id:'clubwellness', name:'ClubWell Studio', addr:'Toronto', neighborhood:'Midtown', em:'💎', color:'studio-av-sky', ig:'@clubwellstudio', instructors:['Instructor'] },
+  { id:'musemovement2', name:'Reformer Republic', addr:'Toronto', neighborhood:'King West', em:'🏛️', color:'studio-av-lilac', ig:'@reformerrepublic', instructors:['Instructor'] },
 ]
 
 const CLASSES = [
