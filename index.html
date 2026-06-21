@@ -110,7 +110,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
 .cam-close{background:rgba(255,255,255,0.12);color:#fff;border-radius:50%;width:36px;height:36px;font-size:14px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
 .cam-main{flex:1;position:relative;overflow:hidden}
 #cam-back{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-#cam-front-preview{position:absolute;bottom:20px;left:20px;width:90px;height:120px;border-radius:14px;border:2.5px solid #fff;object-fit:cover;transform:scaleX(-1);box-shadow:0 4px 20px rgba(0,0,0,0.5);display:none;z-index:5}
+#cam-front-preview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:none;z-index:5;border-radius:0}
 .cam-guide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:4}
 .cam-guide-txt{background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);border-radius:12px;padding:10px 18px;font-size:14px;color:#fff;font-weight:500;letter-spacing:0.02em}
 .cam-overlay-badge{position:absolute;bottom:160px;left:50%;transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:6px}
@@ -233,6 +233,9 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
   <div class="cam-main">
     <video id="cam-back" autoplay playsinline muted></video>
     <video id="cam-front-preview" autoplay playsinline muted></video>
+    <div id="back-thumb-wrap" style="display:none;position:absolute;bottom:20px;right:20px;width:80px;height:107px;border-radius:12px;overflow:hidden;border:2px solid #fff;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,0.5)">
+      <canvas id="back-thumb" width="80" height="107" style="width:100%;height:100%;display:block"></canvas>
+    </div>
     <div class="cam-guide"><div class="cam-guide-txt" id="cam-guide-txt">Point at your studio or reformer</div></div>
     <div class="cam-overlay-badge">
       <div class="cam-studio-pill" id="cam-studio-pill">📍 Studio</div>
@@ -282,12 +285,16 @@ const STUDIOS = [
 ]
 
 const CLASSES = [
-  { id:'reformer', em:'🧘', name:'Reformer', sub:'Mat-based reformer' },
+  { id:'reformer', em:'🧘', name:'Reformer', sub:'Guided reformer' },
   { id:'mat', em:'🤸', name:'Mat Pilates', sub:'Floor-based' },
   { id:'barre', em:'🩰', name:'Barre', sub:'Ballet-inspired' },
   { id:'lagree', em:'⚡', name:'Lagree', sub:'Megaformer' },
   { id:'yoga', em:'🌿', name:'Yoga', sub:'Flow & restore' },
   { id:'stretch', em:'✨', name:'Stretch', sub:'Recovery' },
+  { id:'cardio', em:'🏃', name:'Cardio Pilates', sub:'High energy' },
+  { id:'tower', em:'🗼', name:'Tower', sub:'Cadillac tower' },
+  { id:'chair', em:'🪑', name:'Wunda Chair', sub:'Chair-based' },
+  { id:'private', em:'⭐', name:'Private Session', sub:'One-on-one' },
 ]
 
 const VIBES = [
@@ -388,6 +395,8 @@ async function openCamera() {
   document.getElementById('cam-studio-pill').textContent = '📍 ' + selStudio.name
   document.getElementById('cam-class-pill').textContent = selClass.em + ' ' + selClass.name
   document.getElementById('cam-front-preview').style.display = 'none'
+  document.getElementById('cam-back').style.display = 'block'
+  document.getElementById('back-thumb-wrap').style.display = 'none'
   updateCamUI()
   await startBackCamera()
 }
@@ -423,15 +432,24 @@ async function startBackCamera() {
 
 async function startFrontCamera() {
   if (frontStream) frontStream.getTracks().forEach(t => t.stop())
+  // Show back photo as thumbnail
+  if (backPhotoData) {
+    const thumb = document.getElementById('back-thumb')
+    const tctx = thumb.getContext('2d')
+    const img = new Image(); img.src = backPhotoData
+    img.onload = () => { tctx.drawImage(img, 0, 0, 80, 107) }
+    document.getElementById('back-thumb-wrap').style.display = 'block'
+  }
+  // Hide back video, show front full screen
+  document.getElementById('cam-back').style.display = 'none'
   try {
     frontStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
     const frontVid = document.getElementById('cam-front-preview')
     frontVid.srcObject = frontStream
     frontVid.style.display = 'block'
-    document.getElementById('cam-back').style.opacity = '0.85'
   } catch(e) {
     showToast('Front camera not available')
-    captureFrontPhoto(null)
+    captureFrontAndCompose()
   }
 }
 
@@ -495,8 +513,9 @@ function stopCameras() {
 function closeCamera() {
   stopCameras()
   document.getElementById('s-cam').classList.remove('on')
-  document.getElementById('cam-back').style.opacity = '1'
+  document.getElementById('cam-back').style.display = 'block'
   document.getElementById('cam-front-preview').style.display = 'none'
+  document.getElementById('back-thumb-wrap').style.display = 'none'
 }
 
 function retake() {
@@ -677,7 +696,7 @@ function drawHandle(ctx, W, H, vibe) {
 }
 
 function drawFrontInset(ctx, W, H, vibe) {
-  const iw = 100, ih = 130, ix = 20, iy = H - 180
+  const iw = 130, ih = 170, ix = 18, iy = H - 210
   const img = new Image(); img.src = frontPhotoData
   img.onload = () => {
     ctx.save()
@@ -695,7 +714,7 @@ function drawFrontInset(ctx, W, H, vibe) {
 }
 
 function drawPlaceholderInset(ctx, W, H, vibe) {
-  const iw = 100, ih = 130, ix = 20, iy = H - 180
+  const iw = 130, ih = 170, ix = 18, iy = H - 210
   const grad = ctx.createLinearGradient(ix, iy, ix+iw, iy+ih)
   grad.addColorStop(0, '#f472b6'); grad.addColorStop(1, '#c026d3')
   ctx.fillStyle = grad
@@ -802,22 +821,42 @@ function switchVibe(v, el) {
 }
 
 // ── SHARE ──
+function openPhotoViewer(url, thenInsta) {
+  // Open full screen image — user long-presses to save on iOS
+  const overlay = document.createElement('div')
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center'
+  const img = document.createElement('img')
+  img.src = url
+  img.style.cssText = 'max-width:100%;max-height:80vh;border-radius:12px'
+  const tip = document.createElement('div')
+  tip.style.cssText = 'color:#fff;font-size:14px;font-weight:600;margin-top:16px;text-align:center;padding:0 24px;opacity:0.8;font-family:DM Sans,sans-serif'
+  tip.textContent = 'Hold down on the photo → Save to Photos'
+  const closeBtn = document.createElement('button')
+  closeBtn.textContent = thenInsta ? '✓ Saved — Open Instagram' : '✓ Done'
+  closeBtn.style.cssText = 'margin-top:16px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;border:none;border-radius:14px;padding:14px 28px;font-size:15px;font-weight:700;font-family:DM Sans,sans-serif;cursor:pointer'
+  closeBtn.onclick = () => {
+    document.body.removeChild(overlay)
+    if (thenInsta) {
+      window.location.href = 'instagram://story-camera'
+      setTimeout(() => window.open('https://www.instagram.com', '_blank'), 1500)
+    }
+  }
+  overlay.appendChild(img)
+  overlay.appendChild(tip)
+  overlay.appendChild(closeBtn)
+  document.body.appendChild(overlay)
+}
+
 function shareToInsta() {
   const canvas = document.getElementById('result-canvas')
-  const a = document.createElement('a'); a.download = 'pila-moment.jpg'
-  a.href = canvas.toDataURL('image/jpeg', 0.92); a.click()
-  showToast('Saved! Open Instagram → + → Story 📸')
-  setTimeout(() => {
-    window.location.href = 'instagram://story-camera'
-    setTimeout(() => window.open('https://www.instagram.com', '_blank'), 1500)
-  }, 800)
+  const url = canvas.toDataURL('image/jpeg', 0.92)
+  openPhotoViewer(url, true)
 }
 
 function savePhoto() {
   const canvas = document.getElementById('result-canvas')
-  const a = document.createElement('a'); a.download = 'pila-moment.jpg'
-  a.href = canvas.toDataURL('image/jpeg', 0.92); a.click()
-  showToast('Saved to camera roll ✦')
+  const url = canvas.toDataURL('image/jpeg', 0.92)
+  openPhotoViewer(url, false)
 }
 
 function showToast(msg) {
